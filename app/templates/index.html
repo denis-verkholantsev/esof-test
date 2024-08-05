@@ -61,12 +61,17 @@
         const login = "{{ login }}";
         document.getElementById('login').textContent = login;
 
-        const ws = new WebSocket("ws://localhost:8000/ws");
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const ws = new WebSocket(wsProtocol + window.location.host + "/ws");
 
         ws.onmessage = function(event) {
             const numberElement = document.getElementById('number');
             numberElement.textContent = event.data;
         };
+
+        function logout() {
+            window.location.href = '/logout';
+        }
     </script>
 </body>
 </html>
