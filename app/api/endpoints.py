@@ -22,7 +22,7 @@ async def login(request: Request):
 
 @router.get("/login/github")
 async def login_via_github(request: Request, oauth: OauthClientDependency):
-    redirect_uri = request.url_for("auth_via_github")
+    redirect_uri = request.url_for("auth_via_github").replace('http', 'https')
     return await oauth.github.authorize_redirect(request, redirect_uri)
 
 
